@@ -4,8 +4,10 @@ class BotSpider(scrapy.Spider):
     name = "posts"
 
     start_urls = [
-        'https://blog.scrapinghub.com/page/1/',
-        'https://blog.scrapinghub.com/page/2/'        
+        # 'https://blog.scrapinghub.com/page/1/',
+        # 'https://blog.scrapinghub.com/page/2/ 
+        # 'https://www.zyte.com/blog/page/2'
+        'https://www.samsung.com/us/'      
     ]
 
     def parse(self, response):
