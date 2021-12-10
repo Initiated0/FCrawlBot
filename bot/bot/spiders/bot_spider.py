@@ -7,7 +7,8 @@ class BotSpider(scrapy.Spider):
         # 'https://blog.scrapinghub.com/page/1/',
         # 'https://blog.scrapinghub.com/page/2/ 
         # 'https://www.zyte.com/blog/page/2'
-        'https://www.samsung.com/us/'      
+        'https://www.samsung.com/us/'
+        # 'https://www.facebook.com/nayeem.mohammad1/'      
     ]
 
     def parse(self, response):
