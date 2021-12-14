@@ -8,14 +8,15 @@ class BotSpider(scrapy.Spider):
         # 'https://blog.scrapinghub.com/page/2/ 
         # 'https://www.zyte.com/blog/page/2'
         # 'https://www.samsung.com/us/'
-        # 'https://www.facebook.com/nayeem.mohammad1/'
-        'https://www.bengalsaroma.com/category/blog/page/2/'
-        'https://www.bengalsaroma.com/category/blog/page/3/'      
+        'https://www.facebook.com/nayeem.mohammad1/'
+        # 'https://www.bengalsaroma.com/category/blog/'
+        # 'https://www.bengalsaroma.com/category/blog/page/2/'
+        # 'https://www.bengalsaroma.com/category/blog/page/3/'      
       
     ]
     def parse(self, response):
         page = response.url.split('/')[-1]
-        filename = 'entry-%s.html' % page
+        filename = 'posts-%s.html' % page
         with open(filename, 'wb') as f:
             f.write(response.body)
             # run this with scrapy shell https://www.banglasaroma.com/category/blog/
