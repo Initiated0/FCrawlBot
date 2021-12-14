@@ -8,7 +8,7 @@ class BotSpider(scrapy.Spider):
         # 'https://blog.scrapinghub.com/page/2/ 
         # 'https://www.zyte.com/blog/page/2'
         # 'https://www.samsung.com/us/'
-        'https://www.facebook.com/nayeem.mohammad1/'
+        'https://www.facebook.com/'
         # 'https://www.bengalsaroma.com/category/blog/'
         # 'https://www.bengalsaroma.com/category/blog/page/2/'
         # 'https://www.bengalsaroma.com/category/blog/page/3/'      
