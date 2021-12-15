@@ -32,15 +32,15 @@ soup = BeautifulSoup(html,"html.parser")
 
 # print(soup.find_all('div')[1])
 # print(soup.find_all('p', {'id':'p4'}))
-print(soup.find_all('div', {'id':'d1'})[0].p.text)
+# print(soup.find_all('div', {'id':'d1'})[0].p.text)
 
 data = soup.find_all('div', {'id':'d1'})[0].p.text
 
 functions.write_to_file('./test.txt', data)
 
 result = requests.get("https://google.com")
-print(result)
-print(result.text)
+# print(result)
+# print(result.text)
 
 
 # main function -> requests
@@ -50,3 +50,18 @@ print(result.text)
 # read data and process em + delete em -> functions
 
 # START FROM VIDEO 017 NEXT
+
+def main_scraper(url, directory):
+    functions.create_directory(directory)
+    source_code = requests.get(url)
+    source_text = source_code.text
+    # print(source_text)
+
+    # getting anchor tag
+    soup = BeautifulSoup(source_text, "html.parser")
+    articles = soup.find_all("header", {'class':'entry-header'})
+
+    for article in articles:
+        print(article.a.text)
+
+main_scraper("https://welcometoinitiated.wordpress.com/", "InitiatedBlog")
