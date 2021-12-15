@@ -38,4 +38,3 @@ def read_data(path):
 
 read_data("Wiki/test.txt")
 clear_file("Wiki/test.txt")
-
