@@ -54,14 +54,25 @@ result = requests.get("https://google.com")
 def main_scraper(url, directory):
     functions.create_directory(directory)
     source_code = requests.get(url)
+    print("Source code # ", source_code)
     source_text = source_code.text
     # print(source_text)
 
     # getting anchor tag
     soup = BeautifulSoup(source_text, "html.parser")
-    articles = soup.find_all("header", {'class':'entry-header'})
+    # this code took the first block of the featured course content
+    articles = soup.find_all('div', {'class':'course-block block featured_products'})
 
-    for article in articles:
-        print(article.a.text)
+    articles2 = soup.find_all('header', {'class':'header header-sticky'})
+    
+    articles3 = soup.find_all('main', {'class':'view-school page-layout-v2 main'})
 
-main_scraper("https://welcometoinitiated.wordpress.com/", "InitiatedBlog")
+    articles4 = soup.find_all('div', {"class":"featured-product-card card-style-grid block__column b-79243210-card_background_color b-79243210-card_border_color b-79243210-card_border_width b-79243210-card_border_radius b-79243210-card_text_alignment"})
+
+    # print(articles)
+
+    for article in articles4:
+        print(article.a.get("href"))
+        # print(article.a.text)
+
+main_scraper("https://calmandcode.teachable.com/", "Calmandcode")
