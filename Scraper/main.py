@@ -51,7 +51,7 @@ result = requests.get("https://google.com")
 
 # START FROM VIDEO 017 NEXT
 
-def main_scraper(url, directory):
+def main_scraper1(url, directory):
     functions.create_directory(directory)
     source_code = requests.get(url)
     print("Source code # ", source_code)
@@ -97,4 +97,26 @@ def main_scraper(url, directory):
     functions.read_data(directory+'/articles.txt')
 
 
-main_scraper("https://calmandcode.teachable.com/courses", "Calmandcode")
+    # scraping images, grocery item list and info from "https://www.lazyfruits.com"
+
+def main_scraper2(url, directory):
+    # initial code
+    functions.create_directory(directory)
+    source_code = requests.get(url)
+    source_text = source_code.text
+    soup = BeautifulSoup(source_text, "html.parser")
+    products = soup.find_all("div", {"class":"global-product-each"})
+        
+        # looping over products
+    for product in products:
+        image_tag = product.find('div', {'class':'global-product-img'})
+        # print(image_tag.contents)
+        image_code = image_tag.contents[3]
+        s1 = BeautifulSoup(image_code,'html.parser')
+            
+
+
+
+# main_scraper1("https://calmandcode.teachable.com/courses", "Calmandcode")
+
+main_scraper2("https://www.lazyfruits.com/","LazyFruits")
