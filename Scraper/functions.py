@@ -17,7 +17,7 @@ def write_to_file(path, data):
     with open(path,'a') as file:
         file.write(data + '\n')
 
-write_to_file("Wiki/test.txt", "why this scraping will be such a drag.")
+# write_to_file("Wiki/test.txt", "why this scraping will be such a drag.")
 
 def clear_file(path):
     f = open(path,'w')
