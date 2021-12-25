@@ -3,7 +3,7 @@ import os
 import functions
 import requests
 
-html = """
+html =  """
 
             <div id="d1" class="wide">
                 <p id="p1">Since the love that you left is all that I get
@@ -20,7 +20,7 @@ I miss you more than life (more than life)
                 <a id="a2"></a>
             </div>
 
-            """
+        """
 
 
 soup = BeautifulSoup(html,"html.parser")
@@ -107,12 +107,15 @@ def main_scraper2(url, directory):
     soup = BeautifulSoup(source_text, "html.parser")
     products = soup.find_all("div", {"class":"global-product-each"})
         
-        # looping over products
+    # looping over products
     for product in products:
         image_tag = product.find('div', {'class':'global-product-img'})
-        # print(image_tag.contents)
+        # print(image_tag.contents[3])
+        # print('\n')
         image_code = image_tag.contents[3]
-        s1 = BeautifulSoup(image_code,'html.parser')
+        s1 = BeautifulSoup(str(image_code),'html.parser')
+        image_source = s1.a.find('img').get('src')
+        print(image_source)
             
 
 
