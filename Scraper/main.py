@@ -100,6 +100,7 @@ def main_scraper1(url, directory):
     # scraping images, grocery item list and info from "https://www.lazyfruits.com"
 
 def main_scraper2(url, directory):
+    i = 1
     # initial code
     functions.create_directory(directory)
     source_code = requests.get(url)
@@ -114,11 +115,35 @@ def main_scraper2(url, directory):
         # print('\n')
         image_code = image_tag.contents[3]
         s1 = BeautifulSoup(str(image_code),'html.parser')
+
+        # image
         image_source = s1.a.find('img').get('src')
         print(image_source)
-            
+        
+        # title
+        image_title = s1.a.find('img').get('title')
+        print("Image title : " + image_title)
+
+        # name 
+        name_tag = product.find('div', {'class':'global-product-name'})
+        href = name_tag.find('a').get('href')
+        name = name_tag.find('a').text
+        print(name + '\n' + href)
 
 
+
+        # price
+        price_tag = product.find('div', {'class':'global-product-info-bottom-right'})
+        price = price_tag.contents[1].text
+
+        print("price : " + price)
+
+        product_formatted = "Product #" + str(i) + ":\nName: " + name + "\nPrice: "+ str(price) + "\nImage: " + image_source + "\nhref: " + href + "\n\n"
+        if functions.does_file_exists(directory+"/prodcut_inventory.txt") is False:
+            functions.create_new_file(directory+"/prodcut_inventory.txt")
+        functions.write_to_file(directory+"/prodcut_inventory.txt", product_formatted)
+        i = i + 1
+        
 
 # main_scraper1("https://calmandcode.teachable.com/courses", "Calmandcode")
 

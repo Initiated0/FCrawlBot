@@ -14,7 +14,7 @@ def create_new_file(path):
 # create_new_file("./test.txt")
 
 def write_to_file(path, data):
-    with open(path,'a') as file:
+    with open(path,'a', encoding="utf-8") as file:
         file.write(data + '\n')
 
 # write_to_file("Wiki/test.txt", "why this scraping will be such a drag.")
