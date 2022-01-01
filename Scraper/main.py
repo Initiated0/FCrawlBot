@@ -1,7 +1,12 @@
+from typing import Text
 from bs4 import BeautifulSoup
 import os
 import functions
 import requests
+
+from flask import Flask, render_template
+
+app = Flask(__name__)
 
 html =  """
 
@@ -143,8 +148,39 @@ def main_scraper2(url, directory):
             functions.create_new_file(directory+"/prodcut_inventory.txt")
         functions.write_to_file(directory+"/prodcut_inventory.txt", product_formatted)
         i = i + 1
+
+def main_scraper3(url, directory):
+    # initial code
+    functions.create_directory(directory)
+    source_code = requests.get(url)
+    source_text = source_code.text
+    soup = BeautifulSoup(source_text, "html.parser")
+    # till this point; it's always same
+    # main modification starts below
+    products = soup.find_all("div", {"class":"product"})
+
+    for product in products:
+        item = 1
+        print('-----------------Product # ' + str(item) + '--------------')
+        img_source = product.find('a').find('img').get('src')
+        href = product.find('a').get('href')
+        title = product.find('p').text
+        price = product.find('p', {'class':'price'}).text
+
+        print("Image: " + img_source)
+        print("Title: " + title)
+        print("href: " + href)
+        print("price: " + price)
+
+        item = item + 1
+
+        print("-------------------------------------------------------")
+        print("-------------------------------------------------------")
+
         
 
 # main_scraper1("https://calmandcode.teachable.com/courses", "Calmandcode")
 
-main_scraper2("https://www.lazyfruits.com/","LazyFruits")
+# main_scraper2("https://www.lazyfruits.com/","LazyFruits")
+
+main_scraper3("https://www.thegreatcookie.com/","TheGreatCookie")
