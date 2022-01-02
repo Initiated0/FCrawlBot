@@ -7,6 +7,10 @@ import requests
 from flask import Flask, render_template
 
 app = Flask(__name__)
+@app.route("/")
+def main():
+    return render_template("index.html")
+    
 
 html =  """
 
@@ -184,3 +188,7 @@ def main_scraper3(url, directory):
 # main_scraper2("https://www.lazyfruits.com/","LazyFruits")
 
 main_scraper3("https://www.thegreatcookie.com/","TheGreatCookie")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
