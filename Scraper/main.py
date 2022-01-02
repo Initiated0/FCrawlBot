@@ -4,13 +4,21 @@ import os
 import functions
 import requests
 
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__)
 @app.route("/")
 def main():
     return render_template("index.html")
     
+@app.route("/search", methods=['POST'])
+def search():
+    url = request.form["url"]
+
+    
+    # url = request.files['url']
+    result1 = main_scraper3(url, "Test") # result is an array
+    return render_template("index.html", result=result1)
 
 html =  """
 
@@ -109,6 +117,7 @@ def main_scraper1(url, directory):
     # scraping images, grocery item list and info from "https://www.lazyfruits.com"
 
 def main_scraper2(url, directory):
+    array = []
     i = 1
     # initial code
     functions.create_directory(directory)
@@ -155,6 +164,7 @@ def main_scraper2(url, directory):
 
 def main_scraper3(url, directory):
     # initial code
+    array = []
     functions.create_directory(directory)
     source_code = requests.get(url)
     source_text = source_code.text
@@ -175,19 +185,21 @@ def main_scraper3(url, directory):
         print("Title: " + title)
         print("href: " + href)
         print("price: " + price)
+        array.append({'img_source':img_source, 'href': href, 'title': title, 'price':price})
 
         item = item + 1
 
         print("-------------------------------------------------------")
         print("-------------------------------------------------------")
-
+    
+    return array
         
 
 # main_scraper1("https://calmandcode.teachable.com/courses", "Calmandcode")
 
 # main_scraper2("https://www.lazyfruits.com/","LazyFruits")
 
-main_scraper3("https://www.thegreatcookie.com/","TheGreatCookie")
+main_scraper3("https://www.thegreatcookie.com","TheGreatCookie")
 
 
 if __name__ == "__main__":

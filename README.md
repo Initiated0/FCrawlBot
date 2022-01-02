@@ -12,4 +12,4 @@ python 3.6.5;
 virtualenv (20.4.3);
 beautifulsoup4 4.10.0;
 pip 2.3.1
-
+Flask 2.0.2
