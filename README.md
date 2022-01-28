@@ -13,3 +13,11 @@ virtualenv (20.4.3);
 beautifulsoup4 4.10.0;
 pip 2.3.1
 Flask 2.0.2
+
+
+How to start the project:
+1. From the root directory, inside the shell, type .\crawlenv\Scripts\activate
+2. Next cd to Scraper
+3. Run python main_generic.py
+4. Paste a link to scrape
+
